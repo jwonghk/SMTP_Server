@@ -215,7 +215,11 @@ int do_data(smtp_state *ms) {
     
     while(nb_read_line(ms->nb, ms->recvbuf ) != -1 ) {
         printf("PRINTINT data in the buffer: %s\n" , ms->recvbuf);
-        if(ms->recvbuf[0] == '.' && ms->recvbuf[1] == '\r') {
+        //if(ms->recvbuf[0] == '.' && ms->recvbuf[1] == '\r') {
+        
+        if(ms->recvbuf[0] == '.' && ms->recvbuf[1] == '\n') {
+        
+        //if(ms->recvbuf[0] == '.' && ms->recvbuf[1] == '\r' && ms->recvbuf[2] == '\n') {
             send_formatted(ms->fd, "250 ok \r\n");
             break;
         } else if(ms->recvbuf[0] == '.' && ms->recvbuf[1] == '.') {
